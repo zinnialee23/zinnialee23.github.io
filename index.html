@@ -25,63 +25,34 @@
 <p> International Journalism </p>
 <h3> S.K.H. Chan Young Secondary School | 2009 - 2015 </h3>
 <h2> Photo Wall </h2>
-<style>
-#grid{
-width: 600px;
+@media screen and (min-device-width:698px) {
+  div#showgrid {
+    width: 698px;
+    margin: auto;
+  }
 }
-.gridelement{
-width:200
-float:left;
+
+div.column {
+  border-style: solid;
+  border-width: 1px;
 }
-</style>
 
-<div id="grid">
-<div class="gridelement">
-<img src="15"/>
-<span>Label<span>
+.row {
+  width: 100%;
+  margin: auto;
+}
 
-<div id="grid">
-<div class="gridelement">
-<img src="pic-x"/>
-<span>Label<span>
+@media (min-device-width: 698px) {
+  .column {
+    width: 230px;
+    height: 230px;
+    display: inline;
+    float: left;
+  }
+}
 
-<div id="grid">
-<div class="gridelement">
-<img src="pic-x"/>
-<span>Label<span>
-
-
-<div id="grid">
-<div class="gridelement">
-<img src="pic-x"/>
-<span>Label<span>
-
-<div id="grid">
-<div class="gridelement">
-<img src="pic-x"/>
-<span>Label<span>
-
-<div id="grid">
-<div class="gridelement">
-<img src="pic-x"/>
-<span>Label<span>
-
-
-<div id="grid">
-<div class="gridelement">
-<img src="pic-x"/>
-<span>Label<span>
-
-<div id="grid">
-<div class="gridelement">
-<img src="pic-x"/>
-<span>Label<span>
-
-<div id="grid">
-<div class="gridelement">
-<img src="pic-x"/>
-<span>Label<span>
-
-</div>
-</div>
-
+.column {
+  width: 230px;
+  height: 230px;
+  margin: auto;
+}
