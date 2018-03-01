@@ -97,13 +97,13 @@
 		<p id='education'></p>
                 <script>
                     Education = [{
-                        Year: '2015 - 2019',
-                        Uni: 'HONG KONG BAPTIST UNIVERISTY',
+                        Year: '2015 - Present',
+                        Uni: 'Hong Kong Baptist University',
                         Major: 'BSocSc (Hons) International Journalism'
                     }, {
                         Year: '2017 - 2018 (Semester 1)',
-                        Uni: 'BOWLING GREEN STATE UNIVERSITY',
-                        Major: 'Exchange Student'
+                        Uni: 'Bowling Green State University',
+                        Major: 'Exchange'
                     }]
 
                     o = document.getElementById('education')
@@ -112,7 +112,7 @@
                     for (i = 0; i < Education.length; i++) {
                         console.log(i);
 
-                        itemString = Education[i]['Year'] + '|' + Education[i]['Uni'] +
+                        itemString = Education[i]['Year'] + ' | ' + Education[i]['Uni'] +
                             ' <p>' + Education[i]['Major'] + '</p>';
 
                         allItemString = allItemString + itemString;
