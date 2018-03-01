@@ -81,18 +81,18 @@
                         Title: 'Reporter',
                         Company: 'The Young Reporter',
                         ExtraInfo: '2017 - Present',
-                        Duty1: 'xxx',
-                        Duty2: 'xxx',
-                        Duty3: 'xxx',
-			Duty4: 'xxx'
+                        Duty1: 'Produces news videos',
+                        Duty2: 'Writes feature articles',
+                        Duty3: 'Photojournalism',
+			Duty4: 'Reports current affaris and events'
                     }, {
                         Title: 'Public Relations',
                         Company: 'Common Sense',
                         ExtraInfo: '2016 - 2017',
-                        Duty1: 'xxx',
-                        Duty2: 'xxx',
-                        Duty3: 'xxx',
-			Duty4: 'xxx'
+                        Duty1: 'Wrote introduction and short articles for our publications',
+                        Duty2: 'Edited articles',
+                        Duty3: 'Promotion',
+			Duty4: 'Sought sponsorships for events and contacted guests'
                     }]
 
                     o = document.getElementById('experience')
@@ -101,8 +101,8 @@
                     for (i = 0; i < Experience.length; i++) {
                         console.log(i);
 
-                        itemString = Experience[i]['Company'] +
-                            '|' + Experience[i]['Title'] +
+                        itemString = '<h4>' + Experience[i]['Company'] + '</h4>'+
+                            '|' + '<h5>' + Experience[i]['Title'] + '</h5>' +
                             '<p>' +  Experience[i]['ExtraInfo'] + '</p>' +
                             '<li>' + Experience[i]['Duty1'] + ' </li>' +
                             '<li>' + Experience[i]['Duty2'] + ' </li>' +
@@ -117,7 +117,7 @@
                     }
                 </script>
 		
-// 	    <h4> <b> Reporter </b> | 2017 - Present </h3>
+// 	    <h4> <b> Reporter </b> | 2017 - Present </h4>
 //             <h5> The Yong Reporter <a href="http://tyr.jour.hkbu.edu.hk/">( http://tyr.jour.hkbu.edu.hk/ )</a> </h5>
 //             <ul>
 //             <li> Produces news videos</li>
