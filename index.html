@@ -75,71 +75,24 @@
         </div>
         <div class="col-md-6">
             <h3> <i class="fas fa-briefcase fa-sm"></i> EXPERIENCE </h3>
-		
-		<p id='academic'></p>
-                <script>
-                    Academic = [{
-                        Company: 'THE YOUNG REPORTER',
-                        Title: 'Multi-media Editor',
-                        ExtraInfo: 'Jan 2018 - Now',
-                        Duty1: 'Assist reporters to produce news stories on multi-platforms',
-                        Duty2: 'Generate ideas to deliver visual-compelling news stories',
-                        Duty3: 'Edit news contents in a timely and accurate manner'
-                    }, {
-                        Company: 'THE YOUNG REPORTER',
-                        Title: 'Reporter',
-                        ExtraInfo: 'Jan 2017 - Dec 2017',
-                        Duty1: 'Provide coverage of soft and hard news for print and online media',
-                        Duty2: 'Present news stories in texts, photos, videos and infographics',
-                        Duty3: 'Gather and verify information through observation, research and interview'
-                    }, {
-                        Company: 'HONG KONG BAPTIST UNIVERSITY BUSINESS UNITED SOCEITY',
-                        Title: 'Promotion Officer',
-                        ExtraInfo: 'July 2016 - July 2017',
-                        Duty1: 'Produce promotional materials, such as flyers, posters and souvenirs',
-                        Duty2: 'Generate ideas and themes for multiple events',
-                        Duty3: 'Organize variety of activities for over 200 members'
-                    }]
-
-                    o = document.getElementById('academic')
-
-                    allItemString = '';
-                    for (i = 0; i < Academic.length; i++) {
-                        console.log(i);
-
-                        itemString = Academic[i]['Company'] +
-                            '|' + Academic[i]['Title'] +
-                            '<p>' + '<i>' + Academic[i]['ExtraInfo'] + '</i>' + '</p>' +
-                            '<li>' + Academic[i]['Duty1'] + ' </li>' +
-                            '<li>' + Academic[i]['Duty2'] + ' </li>' +
-                            '<li>' + Academic[i]['Duty3'] + ' </li>' + '<p>&nbsp;</p>';
-
-                        allItemString = allItemString + itemString;
-
-                        o.innerHTML = "<ul>" + allItemString + "</ul>";
-
-                    }
-                </script>
-		
-		 <p id='experience'></p>
+		<p id='experience'></p>
                 <script>
                     Experience = [{
-                        Company: 'The Young Reporter',
                         Title: 'Reporter',
-                        Year: '2017 - Present',
-                        Duty1: 'Produces news videos',
-                        Duty2: 'Writes feature articles',
-                        Duty3: 'Photojournalism',
-			Duty4: 'Reports current affaris and events'
-		
+                        Company: 'The Young Reporter',
+                        ExtraInfo: '2017 - Present',
+                        Duty1: 'xxx',
+                        Duty2: 'xxx',
+                        Duty3: 'xxx',
+			Duty4: 'xxx'
                     }, {
-                        Company: 'Common Sense',
                         Title: 'Public Relations',
-                        Year: '2016 - 2017',
-                        Duty1: 'Wrote introduction and short articles for our publications',
-                        Duty2: 'Edited articles',
-                        Duty3: 'Promotion'
-			Duty4: 'Sought sponsorships for events and contacted guests'
+                        Company: 'Common Sense',
+                        ExtraInfo: '2016 - 2017',
+                        Duty1: 'xxx',
+                        Duty2: 'xxx',
+                        Duty3: 'xxx',
+			Duty4: 'xxx'
                     }]
 
                     o = document.getElementById('experience')
@@ -148,19 +101,22 @@
                     for (i = 0; i < Experience.length; i++) {
                         console.log(i);
 
-                        itemString = Experience[i]['Title'] +
-                            ' | ' + Experience[i]['Year'] +
-                            '<p>' + Experience[i]['Company'] + '</p>' +
+                        itemString = Experience[i]['Company'] +
+                            '|' + Experience[i]['Title'] +
+                            '<p>' +  Experience[i]['ExtraInfo'] + '</p>' +
                             '<li>' + Experience[i]['Duty1'] + ' </li>' +
                             '<li>' + Experience[i]['Duty2'] + ' </li>' +
-                            '<li>' + Experience[i]['Duty3'] + ' </li>' +
-			'<li>' + Experience[i]['Duty4'] + '</li>' ;
+                            '<li>' + Experience[i]['Duty3'] + ' </li>' +  
+				'<li>' + Experience[i]['Duty4'] + ' </li>' +
+				'<p>&nbsp;</p>';
 
                         allItemString = allItemString + itemString;
 
                         o.innerHTML = "<ul>" + allItemString + "</ul>";
 
                     }
+                </script>
+		
 // 	    <h4> <b> Reporter </b> | 2017 - Present </h3>
 //             <h5> The Yong Reporter <a href="http://tyr.jour.hkbu.edu.hk/">( http://tyr.jour.hkbu.edu.hk/ )</a> </h5>
 //             <ul>
