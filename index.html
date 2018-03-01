@@ -50,6 +50,32 @@
     </div>
 </div>        
 <!-- <p align="center"> Room 2315, Ka Ming House, Ka Shing Court, Fanling, N.T. | 15215911@life.hkbu.edu.hk | + (852) 5328 8262 </p> -->
+<script>
+    experience = [
+        {title:'School of communication', date:'2018', location:'Hong Kong'}, 
+        {title:'School of happy', date:'2017', location:'Hong Kong'}
+        ]
+    o = document.getElementById('content')
+    
+// o.innerHTML = '<ul><li>Item 1</li><li>Item 2</li?</ul>'
+
+allItemString = '';
+    for(i=0; i < experience.length;i++){
+        console.log('works');
+
+    itemString = '<li>' + 
+    experience[i]['title'] +
+    ','+ 
+    experience[i]['date'] + 
+    ','+
+    experience[i]['location']+
+    '</li>';
+    allItemString = allItemString + itemString;
+    o.innerHTML = '<ul>' + allItemString + '</ul>';
+    }
+    // console.log('it works');
+</script>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
