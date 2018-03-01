@@ -75,6 +75,52 @@
         </div>
         <div class="col-md-6">
             <h3> <i class="fas fa-briefcase fa-sm"></i> EXPERIENCE </h3>
+		
+		<p id='academic'></p>
+                <script>
+                    Academic = [{
+                        Company: 'THE YOUNG REPORTER',
+                        Title: 'Multi-media Editor',
+                        ExtraInfo: 'Jan 2018 - Now',
+                        Duty1: 'Assist reporters to produce news stories on multi-platforms',
+                        Duty2: 'Generate ideas to deliver visual-compelling news stories',
+                        Duty3: 'Edit news contents in a timely and accurate manner'
+                    }, {
+                        Company: 'THE YOUNG REPORTER',
+                        Title: 'Reporter',
+                        ExtraInfo: 'Jan 2017 - Dec 2017',
+                        Duty1: 'Provide coverage of soft and hard news for print and online media',
+                        Duty2: 'Present news stories in texts, photos, videos and infographics',
+                        Duty3: 'Gather and verify information through observation, research and interview'
+                    }, {
+                        Company: 'HONG KONG BAPTIST UNIVERSITY BUSINESS UNITED SOCEITY',
+                        Title: 'Promotion Officer',
+                        ExtraInfo: 'July 2016 - July 2017',
+                        Duty1: 'Produce promotional materials, such as flyers, posters and souvenirs',
+                        Duty2: 'Generate ideas and themes for multiple events',
+                        Duty3: 'Organize variety of activities for over 200 members'
+                    }]
+
+                    o = document.getElementById('academic')
+
+                    allItemString = '';
+                    for (i = 0; i < Academic.length; i++) {
+                        console.log(i);
+
+                        itemString = Academic[i]['Company'] +
+                            '|' + Academic[i]['Title'] +
+                            '<p>' + '<i>' + Academic[i]['ExtraInfo'] + '</i>' + '</p>' +
+                            '<li>' + Academic[i]['Duty1'] + ' </li>' +
+                            '<li>' + Academic[i]['Duty2'] + ' </li>' +
+                            '<li>' + Academic[i]['Duty3'] + ' </li>' + '<p>&nbsp;</p>';
+
+                        allItemString = allItemString + itemString;
+
+                        o.innerHTML = "<ul>" + allItemString + "</ul>";
+
+                    }
+                </script>
+		
 		 <p id='experience'></p>
                 <script>
                     Experience = [{
