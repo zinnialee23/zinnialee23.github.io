@@ -56,22 +56,52 @@
         <h3> <i class="fas fa-user fa-sm"></i> PERSONAL SUMMARY </h3>
         <p> A passionate and hard-working student journalist who wants to encourage public involvement in social issues and arouse people’s awareness by reporting and documenting what is happening in the world. Multi-skilled with eagerness to find interesting news stories and report them in an objective, balanced and informative manner. A quick learner who is studious, responsible, persistent and willing to take up challenges. Dreamed of being a journalist since 9, I am now seeking for a related internship to expand my journalistic skills and realize my goal. </p>
         <h3> <i class="fas fa-lightbulb fa-sm"></i> SKILLS </h3>
-        <ul>
-        <li>Video shooting</li>
-        <li>Video editing through Adobe Premiere Pro</li>
-        <li>Photojournalism</li>
-        <li>Photo editing through Adobe Photoshop</li>
-        <li>Features writing</li>
-        <li>News reporting</li>
-        <li>Multimedia reporting</li>
-        <li>Broadcast journalism</li>
-        <li>Interviewing</li>
-        <li>Reporting through social media</li>
-        <li>Researching</li> 
-        <li>Editing and proofreading</li>
-        <li>Microsoft Office</li>
-        <li>Language: Cantonese(Native), English(Fluent), Mandarin(Fluent)</li>
-        </ul> 
+	<p id='skills'></p>
+                <script>
+                    Skills = [{
+                        Skill: 'Video shooting'
+                    }, {
+                        Skill: 'Video editing through Adobe Premiere Pro'
+                    }, {
+                        Skill: 'Photojournalism'
+                    }, {
+                        Skill: 'Photo editing through Adobe Photoshop'
+                    }, {
+                        Skill: 'Features writing'
+		    }, {
+                        Skill: 'News reporting'
+		    }, {
+                        Skill: 'Multimedia reporting'     
+	            }, {
+                        Skill: 'Broadcast journalism'
+		    }, {
+                        Skill: 'Interviewing'   
+		    }, {
+                        Skill: 'Reporting through social media'
+	            }, {
+                        Skill: 'Researching'
+		    }, {
+			Skill: 'Microsoft Office'
+		    }, {
+			Skill: 'Language: Cantonese(Native), English(Fluent), Mandarin(Fluent)'
+                    }]
+
+                    o = document.getElementById('skills')
+
+                    allItemString = '';
+                    for (i = 0; i < Skills.length; i++) {
+                        console.log(i);
+
+                        itemString = '<li>' + Skills[i]['Skill'] +
+                            ' </li>';
+
+                        allItemString = allItemString + itemString;
+
+                        o.innerHTML = "<ul>" + allItemString + "</ul>";
+
+                    }
+                </script>	
+		
         </div>
         <div class="col-md-6">
             <h3> <i class="fas fa-briefcase fa-sm"></i> EXPERIENCE </h3>
