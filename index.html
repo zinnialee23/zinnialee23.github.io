@@ -50,32 +50,6 @@
     </div>
 </div>        
 <!-- <p align="center"> Room 2315, Ka Ming House, Ka Shing Court, Fanling, N.T. | 15215911@life.hkbu.edu.hk | + (852) 5328 8262 </p> -->
-<script>
-    experience = [
-        {title:'School of communication', date:'2018', location:'Hong Kong'}, 
-        {title:'School of happy', date:'2017', location:'Hong Kong'}
-        ]
-    o = document.getElementById('content')
-    
-// o.innerHTML = '<ul><li>Item 1</li><li>Item 2</li?</ul>'
-
-allItemString = '';
-    for(i=0; i < experience.length;i++){
-        console.log('works');
-
-    itemString = '<li>' + 
-    experience[i]['title'] +
-    ','+ 
-    experience[i]['date'] + 
-    ','+
-    experience[i]['location']+
-    '</li>';
-    allItemString = allItemString + itemString;
-    o.innerHTML = '<ul>' + allItemString + '</ul>';
-    }
-    // console.log('it works');
-</script>
-
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -120,12 +94,37 @@ allItemString = '';
             <h3>  <i class="fas fa-pencil-alt fa-sm"></i> PUBLICATION </h3>
             <p> For samples of my journalism work, please visit my site at <a href="http://zinnialee23.wordpress.com">zinnialee23.wordpress.com</a> </p>
             <h3> <i class="fas fa-graduation-cap fa-sm"></i> EDUCATION </h3> 
-	    <h4> <b> Hong Kong Baptist University </b> | 2015 - Present </h4>
-            <h5> Bachelor of Social Science in Communication </h5>
-            <h6> International Journalism </h6>
-	    <h4> <b> Bowling Green State University </b> | 2017 </h4>
-	    <h5> Exchange </h5>
-            <h4> <b> S.K.H. Chan Young Secondary School </b> | 2009 - 2015 </h4>
+		<script>
+                    Education = [{
+                        Year: '2015 - Present',
+                        Uni: 'Hong Kong Baptist University',
+                        Major: 'BSocSc (Hons) International Journalism'
+                    }, {
+                        Year: '2017 - 2018 (Semester 1)',
+                        Uni: 'Bowling Green State University',
+                        Major: 'Exchange'
+                    }, {
+			Year: '2009 - 2015',
+                        Uni: 'S.K.H Chan Young Secondary School',
+		    }]
+
+                    o = document.getElementById('education')
+
+                    allItemString = '';
+                    for (i = 0; i < Education.length; i++) {
+                        console.log(i);
+
+                        itemString = Education[i]['Year'] + '|' + Education[i]['Uni'] +
+                            ' <p>' + Education[i]['Major'] + '</p>';
+
+                        allItemString = allItemString + itemString;
+
+                        o.innerHTML = "<ul>" + allItemString + "</ul>";
+
+                    }
+                </script>
+		
+	   
         </div>
     </div>
 </div>
