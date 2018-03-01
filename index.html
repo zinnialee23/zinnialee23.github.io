@@ -102,7 +102,7 @@
                         console.log(i);
 
                         itemString = '<h4>' + Experience[i]['Title'] +
-                            '|' + Experience[i]['ExtraInfo'] + '</h4>' +
+                            ' | ' + Experience[i]['ExtraInfo'] + '</h4>' +
                             '<p>' + '<h5>' + Experience[i]['Company'] + '</h5>' + '</p>' +
                             '<li>' + Experience[i]['Duty1'] + ' </li>' +
                             '<li>' + Experience[i]['Duty2'] + ' </li>' +
@@ -117,22 +117,6 @@
                     }
                 </script>
 		
-// 	    <h4> <b> Reporter </b> | 2017 - Present </h4>
-//             <h5> The Yong Reporter <a href="http://tyr.jour.hkbu.edu.hk/">( http://tyr.jour.hkbu.edu.hk/ )</a> </h5>
-//             <ul>
-//             <li> Produces news videos</li>
-//             <li>Writes feature articles</li>
-//             <li> Photojournalism</li>
-//             <li>Reports current affaris and events</li>
-//             </ul> 
-// 	    <h4> <b> Public Relations </b> | 2016 - 2017 </h4>
-//             <h5> Common Sense </h5>
-//             <ul>
-//             <li>Wrote introduction and short articles for our publications</li>
-//             <li>Edited articles</li>
-//             <li>Promotion</li>
-//             <li>Sought sponsorships for events and contacted guests</li>
-//             </ul> 
             <h3>  <i class="fas fa-pencil-alt fa-sm"></i> PUBLICATION </h3>
             <p> For samples of my journalism work, please visit my site at <a href="http://zinnialee23.wordpress.com">zinnialee23.wordpress.com</a> </p>
             
@@ -155,8 +139,8 @@
                     for (i = 0; i < Education.length; i++) {
                         console.log(i);
 
-                        itemString = Education[i]['Year'] + ' | ' + Education[i]['Uni'] +
-                            ' <p>' + Education[i]['Major'] + '</p>';
+                        itemString = '<h4>' + Education[i]['Year'] + ' | ' + Education[i]['Uni'] + '</h4>' +
+                            ' <p>' + '<h5>' + Education[i]['Major'] + '</h5>' + '</p>';
 
                         allItemString = allItemString + itemString;
 
