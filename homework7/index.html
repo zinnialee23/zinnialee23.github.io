@@ -28,23 +28,37 @@ var x = d3.scaleLinear();
 </style>
 
 <script>
+var x = d3.scaleLinear()
+    .domain([0, 230]) // range of your raw data (smallest:0, biggest:230 in the data) (input)
+    .range([0, 800]); // range of svg coordinates (how big you want your graph is e.g. width is 300) (output)
+var y = d3.scaleLinear()
+    .domain([0, 100]) // range of your raw data (input)
+    .range([500, 0]); // range of svg coordinates (output) (e.g. height is 200)
+
+//     var xAxis = d3.axisBottom().scale(x).ticks(10); // make the axis, ticks: change the scale
+//     var yAxis = d3.axisLeft().scale(y); // make the axis
+
+//     var svg= d3.select('svg').append("g").attr("transform", "translate(40, 40)"); // make the axis
+
+//     svg.append('g')  // make the axis (axis coordinate)
+//     .attr('transform', 'translate(0, 500)')
+//     .call(xAxis);
+
+//     svg.append('g')  // make the axis
+//     .attr('transform', 'translate(0, 0)')
+//     .call(yAxis);
+
+    // svg.remove();
     var data = [{
-            'height': 170,
-            'weight': 70,
+            'expenditure': 113.7,
         }, {
-            'height': 160,
-            'weight': 50,
+            'expenditure': 78,
         }, {
-            'height': 180,
-            'weight': 70,
+            'expenditure': 92.2,
         }, {
-            'height': 180,
-            'weight': 80,
+            'expenditure': 85.6,
         }, 
-        {
-            'height': 100,
-            'weight': 40,
-        },];
+];
 
         var data2 = [{
             'height': 170,
@@ -124,48 +138,48 @@ var x = d3.scaleLinear();
 
     svg
     .selectAll('circle') //select circle, bind elements to data
-    .data(dataset[0][1]) //bind data
+    .data(data) //bind data
     .enter()
     .append('circle')
     .attr('cx', function(d) { //data=d, can be any thing
-        return x(d['height']);
+        return x(d['expenditure']);
     })
       .attr('cy', function(d) {
-        return y(d['weight']);
+        return y(d['expenditure']);
       // return frameHeight - d['weight'];
     })
     .attr('r', function(d) {
       // return d['weight']/10;
-      return Math.sqrt (d['weight']); //change size of the circle according to the weight
+      return Math.sqrt (d['expenditure']); //change size of the circle according to the weight
     })
     .attr('fill', '#ff0000');
 
-    yearLabel.text("2001")
+//     yearLabel.text("2001")
 
-    var keySnapshot = 0;
-    d3.interval(function(){
-        keySnapshot = (keySnapshot + 1) % dataset.length;
-        svg 
-    .selectAll('circle') 
-    .data(dataset[keySnapshot][1]) 
-    .transition() 
-   // .duration(2000) 
-    .attr('cx', function(d) { 
-        return x(d['height']);
-    })
-      .attr('cy', function(d) {
-        return y(d['weight']);
-      // return frameHeight - d['weight'];
-    })
-    .attr('r', function(d) {
-      return d['weight']/10;
-     // return Math.sqrt (d['weight']); 
-    })
-    .attr('fill', '#00ff00');
+//     var keySnapshot = 0;
+//     d3.interval(function(){
+//         keySnapshot = (keySnapshot + 1) % dataset.length;
+//         svg 
+//     .selectAll('circle') 
+//     .data(dataset[keySnapshot][1]) 
+//     .transition() 
+//    // .duration(2000) 
+//     .attr('cx', function(d) { 
+//         return x(d['height']);
+//     })
+//       .attr('cy', function(d) {
+//         return y(d['weight']);
+//       // return frameHeight - d['weight'];
+//     })
+//     .attr('r', function(d) {
+//       return d['weight']/10;
+//      // return Math.sqrt (d['weight']); 
+//     })
+//     .attr('fill', '#00ff00');
 
-    yearLabel.text(""  + dataset[keySnapshot][0]); // loop year
+//     yearLabel.text(""  + dataset[keySnapshot][0]); // loop year
 
-    }, 1000)
+//     }, 1000)
 </script>
 
 <!-- <script>
@@ -195,10 +209,11 @@ var x = d3.scaleLinear();
         svg.append('circle').attr('cx', x).attr('cy', y).attr('r', 5);
         }
     </script> -->
+    
 
 
-
-<script>
+// try
+<!-- <script>
 var diameter = 500, //max size of the bubbles
     color    = d3.scale.category20b(); //color category
 
@@ -250,3 +265,4 @@ d3.csv("zinnialee23.github.io/homework7/expenditure.csv", function(error, data){
 </script>
     
     
+ -->
