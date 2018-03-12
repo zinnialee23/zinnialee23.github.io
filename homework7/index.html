@@ -24,30 +24,19 @@
 	<script type="text/javascript">
 
         dataset = {
-            "children": [{"Name":"Olives","Count":4319},
-                {"Name":"Tea","Count":4159},
-                {"Name":"Mashed Potatoes","Count":2583},
-                {"Name":"Boiled Potatoes","Count":2074},
-                {"Name":"Milk","Count":1894},
-                {"Name":"Chicken Salad","Count":1809},
-                {"Name":"Vanilla Ice Cream","Count":1713},
-                {"Name":"Cocoa","Count":1636},
-                {"Name":"Lettuce Salad","Count":1566},
-                {"Name":"Lobster Salad","Count":1511},
-                {"Name":"Chocolate","Count":1489},
-                {"Name":"Apple Pie","Count":1487},
-                {"Name":"Orange Juice","Count":1423},
-                {"Name":"American Cheese","Count":1372},
-                {"Name":"Green Peas","Count":1341},
-                {"Name":"Assorted Cakes","Count":1331},
-                {"Name":"French Fried Potatoes","Count":1328},
-                {"Name":"Potato Salad","Count":1306},
-                {"Name":"Baked Potatoes","Count":1293},
-                {"Name":"Roquefort","Count":1273},
-                {"Name":"Stewed Prunes","Count":1268}]
+            "children": [
+		{"Area":"Education","Amount":113.7},
+                {"Area":"Social welfare","Amount":92.2},
+                {"Area":"Others","Amount":87.1},
+                {"Area":"Infrastructure","Amount":85.6},
+                {"Area":"Health","Amount":78},
+                {"Area":"Security","Amount":53.3},
+                {"Area":"Environment and food","Amount":26.7},
+                {"Area":"Economic","Amount":21.3},
+                ]
         };
 
-        var diameter = 600;
+        var diameter = 200;
         var color = d3.scaleOrdinal(d3.schemeCategory20);
 
         var bubble = d3.pack(dataset)
@@ -77,7 +66,7 @@
 
         node.append("title")
             .text(function(d) {
-                return d.Name + ": " + d.Count;
+                return d.Area + ": " + d.Amount;
             });
 
         node.append("circle")
@@ -92,7 +81,7 @@
             .attr("dy", ".2em")
             .style("text-anchor", "middle")
             .text(function(d) {
-                return d.data.Name.substring(0, d.r / 3);
+                return d.data.Area.substring(0, d.r / 3);
             })
             .attr("font-family", "sans-serif")
             .attr("font-size", function(d){
@@ -104,7 +93,7 @@
             .attr("dy", "1.3em")
             .style("text-anchor", "middle")
             .text(function(d) {
-                return d.data.Count;
+                return d.data.Amount;
             })
             .attr("font-family",  "Gill Sans", "Gill Sans MT")
             .attr("font-size", function(d){
