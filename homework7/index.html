@@ -34,7 +34,7 @@
                 {"Area":"Economic","Amount":21.3}]
         };
 
-        var diameter = 200;
+        var diameter = 600;
         var color = d3.scaleOrdinal(d3.schemeCategory20);
 
         var bubble = d3.pack(dataset)
@@ -88,7 +88,7 @@
             .attr("fill", "white");
 
         node.append("text")
-            .attr("dy", "1.3em")
+            .attr("dy", "1.5em")
             .style("text-anchor", "middle")
             .text(function(d) {
                 return d.data.Amount;
