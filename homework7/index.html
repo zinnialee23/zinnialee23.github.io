@@ -8,261 +8,57 @@
 <script src="https://d3js.org/d3-time.v1.min.js"></script>
 <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
 <script src="https://d3js.org/d3-scale.v2.min.js"></script>
-<script>
 
-var x = d3.scaleLinear();
+var d3 = require("d3"),
+    jsdom = require("jsdom");
 
-</script>
+var document = jsdom.jsdom(),
+    svg = d3.select(document.body).append("svg");
 
-<h1>Bubble chart in D3</h1>
+(function() {
 
-<svg>
-    <text x=10 y=10>Bubble</text>
-</svg>
+  // Fake JSON data
+  var json = {"countries_msg_vol": {
+    "CA": 170, "US": 393, "BB": 12, "CU": 9, "BR": 89, "MX": 192, "PY": 32, "UY": 9, "VE": 25, "BG": 42, "CZ": 12, "HU": 7, "RU": 184, "FI": 42, "GB": 162, "IT": 87, "ES": 65, "FR": 42, "DE": 102, "NL": 12, "CN": 92, "JP": 65, "KR": 87, "TW": 9, "IN": 98, "SG": 32, "ID": 4, "MY": 7, "VN": 8, "AU": 129, "NZ": 65, "GU": 11, "EG": 18, "LY": 4, "ZA": 76, "A1": 2, "Other": 254 
+  }};
+  
+	// D3 Bubble Chart 
 
-<style>
-    svg{
-        width: 1500px;
-        height: 1000px;
+	var diameter = 600;
+
+	var svg = d3.select('#graph').append('svg')
+					.attr('width', diameter)
+					.attr('height', diameter);
+
+	var bubble = d3.layout.pack()
+				.size([diameter, diameter])
+				.value(function(d) {return d.size;})
+         // .sort(function(a, b) {
+				// 	return -(a.value - b.value)
+				// }) 
+				.padding(3);
+  
+  // generate data with calculated layout values
+  var nodes = bubble.nodes(processData(json))
+						.filter(function(d) { return !d.children; }); // filter out the outer bubble
+ 
+  var vis = svg.selectAll('circle')
+					.data(nodes);
+  
+  vis.enter().append('circle')
+			.attr('transform', function(d) { return 'translate(' + d.x + ',' + d.y + ')'; })
+			.attr('r', function(d) { return d.r; })
+			.attr('class', function(d) { return d.className; });
+  
+  function processData(data) {
+    var obj = data.countries_msg_vol;
+
+    var newDataSet = [];
+
+    for(var prop in obj) {
+      newDataSet.push({name: prop, className: prop.toLowerCase(), size: obj[prop]});
     }
-</style>
-
-<script>
-var x = d3.scaleLinear()
-    .domain([0, 120]) // range of your raw data (smallest:0, biggest:230 in the data) (input)
-    .range([0, 300]); // range of svg coordinates (how big you want your graph is e.g. width is 300) (output)
-var y = d3.scaleLinear()
-    .domain([0, 120]) // range of your raw data (input)
-    .range([300, 0]); // range of svg coordinates (output) (e.g. height is 200)
-
-//     var xAxis = d3.axisBottom().scale(x).ticks(10); // make the axis, ticks: change the scale
-//     var yAxis = d3.axisLeft().scale(y); // make the axis
-
-//     var svg= d3.select('svg').append("g").attr("transform", "translate(40, 40)"); // make the axis
-
-//     svg.append('g')  // make the axis (axis coordinate)
-//     .attr('transform', 'translate(0, 500)')
-//     .call(xAxis);
-
-//     svg.append('g')  // make the axis
-//     .attr('transform', 'translate(0, 0)')
-//     .call(yAxis);
-
-    // svg.remove();
-    var data = [{
-            'expenditure': 113.7,
-        }, {
-            'expenditure': 78,
-        }, {
-            'expenditure': 92.2,
-        }, {
-            'expenditure': 85.6,
-        }, 
-];
-
-        var data2 = [{
-            'height': 170,
-            'weight': 70,
-        }, {
-            'height': 160,
-            'weight': 70,
-        }, {
-            'height': 180,
-            'weight': 90,
-        }, {
-            'height': 185,
-            'weight': 70,
-        }, 
-        {
-            'height': 150,
-            'weight': 80,
-        },];
-
-        var dataset = [
-    [2001, [{
-        'height': 170,
-        'weight': 70,
-    }, {
-        'height': 160,
-        'weight': 50,
-    }, {
-        'height': 180,
-        'weight': 70,
-    }, {
-        'height': 180,
-        'weight': 80,
-    }, {
-        'height': 100,
-        'weight': 40,
-    }, ]],
-    [2002, [{
-        'height': 170,
-        'weight': 70,
-    }, {
-        'height': 160,
-        'weight': 50,
-    }, {
-        'height': 180,
-        'weight': 70,
-    }, {
-        'height': 180,
-        'weight': 80,
-    }, {
-        'height': 120,
-        'weight': 80,
-    }, ]],
-    [2003, [{
-        'height': 180,
-        'weight': 70,
-    }, {
-        'height': 170,
-        'weight': 50,
-    }, {
-        'height': 190,
-        'weight': 70,
-    }, {
-        'height': 200,
-        'weight': 80,
-    }, {
-        'height': 130,
-        'weight': 80,
-    }, ]],
-    ]
-
-    console.log(data);
-     var frameHeight = 150;
-     var yearLabel = svg.append("text") // year
-        .attr("x", 20)
-        .attr("y", 20)
-        .attr("font-size", 50);
-
-    svg
-    .selectAll('circle') //select circle, bind elements to data
-    .data(data) //bind data
-    .enter()
-    .append('circle')
-//     .attr('cx', function(d) { //data=d, can be any thing
-//         return x(d['expenditure']);
-//     })
-//       .attr('cy', function(d) {
-//         return y(d['expenditure']);
-//       // return frameHeight - d['weight'];
-//     })
-    .attr('r', function(d) {
-      // return d['weight']/10;
-      return Math.sqrt (d['expenditure']); //change size of the circle according to the weight
-    })
-    .attr('fill', '#ff0000');
-
-//     yearLabel.text("2001")
-
-//     var keySnapshot = 0;
-//     d3.interval(function(){
-//         keySnapshot = (keySnapshot + 1) % dataset.length;
-//         svg 
-//     .selectAll('circle') 
-//     .data(dataset[keySnapshot][1]) 
-//     .transition() 
-//    // .duration(2000) 
-//     .attr('cx', function(d) { 
-//         return x(d['height']);
-//     })
-//       .attr('cy', function(d) {
-//         return y(d['weight']);
-//       // return frameHeight - d['weight'];
-//     })
-//     .attr('r', function(d) {
-//       return d['weight']/10;
-//      // return Math.sqrt (d['weight']); 
-//     })
-//     .attr('fill', '#00ff00');
-
-//     yearLabel.text(""  + dataset[keySnapshot][0]); // loop year
-
-//     }, 1000)
-</script>
-
-<!-- <script>
-        var svg= d3.select('svg');
-        // svg.remove();
-        var data = [{
-                'height': 170,
-                'weight': 70,
-            }, {
-                'height': 160,
-                'weight': 50,
-            }, {
-                'height': 180,
-                'weight': 70,
-            }, {
-                'height': 180,
-                'weight': 80,
-            }, ];
-        // svg.append('circle').attr('cx', 170).attr('cy', 70).attr('r', 10)
-        // svg.append('circle').attr('cx', 160).attr('cy', 50).attr('r', 10)
-        // svg.append('circle').attr('cx', 180).attr('cy', 70).attr('r', 10)
-        // svg.append('circle').attr('cx', 180).attr('cy', 80).attr('r', 10)
-        var frameHeight = 150;
-        for (i=0; i < data.length; i++) {
-        var x = data[i]['height'];
-        var y = frameHeight - data[i]['weight'];
-        svg.append('circle').attr('cx', x).attr('cy', y).attr('r', 5);
-        }
-    </script> -->
-    
-
-
-// try
-<!-- <script>
-var diameter = 500, //max size of the bubbles
-    color    = d3.scale.category20b(); //color category
-
-var bubble = d3.layout.pack()
-    .sort(null)
-    .size([diameter, diameter])
-    .padding(1.5);
-
-var svg = d3.select("body")
-    .append("svg")
-    .attr("width", diameter)
-    .attr("height", diameter)
-    .attr("class", "bubble");
-
-d3.csv("zinnialee23.github.io/homework7/expenditure.csv", function(error, data){
-
-    //convert numerical values from strings to numbers
-    data = data.map(function(d){ d.value = +d["Expenditure"]; return d; });
-
-    //bubbles needs very specific format, convert data to this.
-    var nodes = bubble.nodes({children:data}).filter(function(d) { return !d.children; });
-
-    //setup the chart
-    var bubbles = svg.append("g")
-        .attr("transform", "translate(0,0)")
-        .selectAll(".bubble")
-        .data(nodes)
-        .enter();
-
-    //create the bubbles
-    bubbles.append("circle")
-        .attr("r", function(d){ return d.r; })
-        .attr("cx", function(d){ return d.x; })
-        .attr("cy", function(d){ return d.y; })
-        .style("fill", function(d) { return color(d.value); });
-
-    //format the text for each bubble
-<!--     bubbles.append("text")
-        .attr("x", function(d){ return d.x; })
-        .attr("y", function(d){ return d.y + 5; })
-        .attr("text-anchor", "middle")
-        .text(function(d){ return d["Fruit"]; })
-        .style({
-            "fill":"white", 
-            "font-family":"Helvetica Neue, Helvetica, Arial, san-serif",
-            "font-size": "12px"
-        }); -->
-})
-</script>
-    
-    
- -->
+    return {children: newDataSet};
+  }
+  
+})();
