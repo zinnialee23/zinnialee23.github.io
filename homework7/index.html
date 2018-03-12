@@ -14,7 +14,7 @@ var x = d3.scaleLinear();
 
 </script>
 
-<h1>Demo of Bubble chart in D3</h1>
+<h1>Bubble chart in D3</h1>
 
 <svg>
     <text x=10 y=10>Bubble</text>
@@ -29,11 +29,11 @@ var x = d3.scaleLinear();
 
 <script>
 var x = d3.scaleLinear()
-    .domain([0, 230]) // range of your raw data (smallest:0, biggest:230 in the data) (input)
-    .range([0, 800]); // range of svg coordinates (how big you want your graph is e.g. width is 300) (output)
+    .domain([0, 120]) // range of your raw data (smallest:0, biggest:230 in the data) (input)
+    .range([0, 300]); // range of svg coordinates (how big you want your graph is e.g. width is 300) (output)
 var y = d3.scaleLinear()
-    .domain([0, 100]) // range of your raw data (input)
-    .range([500, 0]); // range of svg coordinates (output) (e.g. height is 200)
+    .domain([0, 120]) // range of your raw data (input)
+    .range([300, 0]); // range of svg coordinates (output) (e.g. height is 200)
 
 //     var xAxis = d3.axisBottom().scale(x).ticks(10); // make the axis, ticks: change the scale
 //     var yAxis = d3.axisLeft().scale(y); // make the axis
@@ -129,7 +129,7 @@ var y = d3.scaleLinear()
     }, ]],
     ]
 
-    console.log(dataset);
+    console.log(data);
      var frameHeight = 150;
      var yearLabel = svg.append("text") // year
         .attr("x", 20)
@@ -141,13 +141,13 @@ var y = d3.scaleLinear()
     .data(data) //bind data
     .enter()
     .append('circle')
-    .attr('cx', function(d) { //data=d, can be any thing
-        return x(d['expenditure']);
-    })
-      .attr('cy', function(d) {
-        return y(d['expenditure']);
-      // return frameHeight - d['weight'];
-    })
+//     .attr('cx', function(d) { //data=d, can be any thing
+//         return x(d['expenditure']);
+//     })
+//       .attr('cy', function(d) {
+//         return y(d['expenditure']);
+//       // return frameHeight - d['weight'];
+//     })
     .attr('r', function(d) {
       // return d['weight']/10;
       return Math.sqrt (d['expenditure']); //change size of the circle according to the weight
