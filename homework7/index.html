@@ -213,7 +213,7 @@ var svg = d3.select("body")
     .attr("height", diameter)
     .attr("class", "bubble");
 
-d3.csv("expenditure.csv", function(error, data){
+d3.csv("zinnialee23.github.io/homework7/expenditure.csv", function(error, data){
 
     //convert numerical values from strings to numbers
     data = data.map(function(d){ d.value = +d["Expenditure"]; return d; });
