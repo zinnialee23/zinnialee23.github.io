@@ -1,437 +1,228 @@
-<html>
-<head>
-	
-<link rel="stylesheet" href="animate.css">
-	
-<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>      
-
-<style>
-
-
-
-        #header {
-        background-color:#686868;
-        padding: 30px;
-    }
-
-      h1 {
-	font-family: Open Sans Semibold;
-}
-      h3 {
-	font-family: Open Sans Semibold;
-	font-weight: bold
-}
-      h4 {
-	font-family: Open Sans;
-}
-      h5 {
-	font-family: Open Sans;
-}
-      h6 {
-	font-family: Open Sans;
-	font-size: 14px
-}
-      p {
-	font-family: Open Sans;
-	font-size: 16px
-}
-      li {
-	font-family: Open Sans;
-	font-size: 16px
-}
-</style>
-      
-</head>
-      
-<body>
-<div id='header'>
-<div class="container">
-    <div class="row">
-         <img src="zinnialee23.github.io/hello.gif" class="pull-left" width="200" height="200" hspace="20">
-	    <h1 style="color:white; font-size:35" class="fadeInDown"> <b>  LEE YAN KIU  </b> </h1> 
-	    <h4 style="color:white"> <b> STUDENT JOURNALIST </b> </h4>
-             <p style="color:white"> <i class="fas fa-envelope fa-xs"></i> 15215911@life.hkbu.edu.hk </p>
-        </div>
-    </div>
-</div>        
-<!-- <p align="center"> Room 2315, Ka Ming House, Ka Shing Court, Fanling, N.T. | 15215911@life.hkbu.edu.hk | + (852) 5328 8262 </p> -->
-<div class="container">
-    <div class="row">
-        <div class="col-md-6">
-        <h3> <i class="fas fa-user fa-sm"></i> PERSONAL SUMMARY </h3>
-        <p> A passionate and hard-working student journalist who wants to encourage public involvement in social issues and arouse people’s awareness by reporting and documenting what is happening in the world. Multi-skilled with eagerness to find interesting news stories and report them in an objective, balanced and informative manner. A quick learner who is studious, responsible, persistent and willing to take up challenges. Dreamed of being a journalist since 9, I am now seeking for a related internship to expand my journalistic skills and realize my goal. </p>
-        <h3> <i class="fas fa-lightbulb fa-sm"></i> SKILLS </h3>
-	<p id='skills'></p>
-                <script>
-                    Skills = [{
-                        Skill: 'Video shooting'
-                    }, {
-                        Skill: 'Video editing through Adobe Premiere Pro'
-                    }, {
-                        Skill: 'Photojournalism'
-                    }, {
-                        Skill: 'Photo editing through Adobe Photoshop'
-                    }, {
-                        Skill: 'Features writing'
-		    }, {
-                        Skill: 'News reporting'
-		    }, {
-                        Skill: 'Multimedia reporting'     
-	            }, {
-                        Skill: 'Broadcast journalism'
-		    }, {
-                        Skill: 'Interviewing'   
-		    }, {
-                        Skill: 'Reporting through social media'
-	            }, {
-                        Skill: 'Researching'
-		    }, {
-			Skill: 'Microsoft Office'
-		    }, {
-			Skill: 'Language: Cantonese (Native), English (Fluent), Mandarin (Fluent)'
-                    }]
-
-                    o = document.getElementById('skills')
-
-                    allItemString = '';
-                    for (i = 0; i < Skills.length; i++) {
-                        console.log(i);
-
-                        itemString = '<li>' + Skills[i]['Skill'] +
-                            ' </li>';
-
-                        allItemString = allItemString + itemString;
-
-                        o.innerHTML = "<ul>" + allItemString + "</ul>";
-
-                    }
-                </script>	
-		
-        </div>
-        <div class="col-md-6">
-            <h3> <i class="fas fa-briefcase fa-sm"></i> EXPERIENCE </h3>
-		<p id='experience'></p>
-                <script>
-                    Experience = [{
-                        Title: 'Reporter',
-                        Company: 'The Young Reporter <a href="http://tyr.jour.hkbu.edu.hk/">( http://tyr.jour.hkbu.edu.hk/ )</a>',
-                        ExtraInfo: '2017 - Present',
-                        Duty1: 'Produces news videos',
-                        Duty2: 'Writes feature articles',
-                        Duty3: 'Photojournalism',
-			Duty4: 'Reports current affaris and events'
-                    }, {
-                        Title: 'Public Relations',
-                        Company: 'Common Sense',
-                        ExtraInfo: '2016 - 2017',
-                        Duty1: 'Wrote introduction and short articles for our publications',
-                        Duty2: 'Edited articles',
-                        Duty3: 'Promotion',
-			Duty4: 'Sought sponsorships for events and contacted guests'
-                    }]
-
-                    o = document.getElementById('experience')
-
-                    allItemString = '';
-                    for (i = 0; i < Experience.length; i++) {
-                        console.log(i);
-
-                        itemString = '<h4>' + Experience[i]['Title'] +
-                            ' | ' + Experience[i]['ExtraInfo'] + '</h4>' +
-                            '<p>' + '<h5>' + Experience[i]['Company'] + '</h5>' + '</p>' +
-                            '<li>' + Experience[i]['Duty1'] + ' </li>' +
-                            '<li>' + Experience[i]['Duty2'] + ' </li>' +
-                            '<li>' + Experience[i]['Duty3'] + ' </li>' +  
-				'<li>' + Experience[i]['Duty4'] + ' </li>' +
-				'<p>&nbsp;</p>';
-
-                        allItemString = allItemString + itemString;
-
-                        o.innerHTML = "<ul>" + allItemString + "</ul>";
-
-                    }
-                </script>
-		
-            <h3>  <i class="fas fa-pencil-alt fa-sm"></i> PUBLICATION </h3>
-            <p> For samples of my journalism work, please visit my site at <a href="http://zinnialee23.wordpress.com">zinnialee23.wordpress.com</a> </p>
-            
-		<h3> <i class="fas fa-graduation-cap fa-sm"></i> EDUCATION </h3> 
-		<p id='education'></p>
-                <script>
-                    Education = [{
-                        Year: '2015 - Present',
-                        Uni: 'Hong Kong Baptist University',
-                        Major: 'BSocSc (Hons) International Journalism'
-                    }, {
-                        Year: '2017 - 2018 (Semester 1)',
-                        Uni: 'Bowling Green State University',
-                        Major: 'Exchange'
-                    }]
-
-                    o = document.getElementById('education')
-
-                    allItemString = '';
-                    for (i = 0; i < Education.length; i++) {
-                        console.log(i);
-
-                        itemString = '<h4>' + Education[i]['Year'] + ' | ' + Education[i]['Uni'] + '</h4>' +
-                            ' <p>' + '<h5>' + Education[i]['Major'] + '</h5>' + '</p>';
-
-                        allItemString = allItemString + itemString;
-
-                        o.innerHTML = "<ul>" + allItemString + "</ul>";
-
-                    }
-                </script>
-	   
-        </div>
-    </div>
-</div>
-
-<div class="container">
-    <div class="row">
-    <div class="col-md-4">
-    <h3> <i class="fas fa-camera fa-sm"></i> PHOTO WALL </h3>
-    </div>
-    <div class="col-md-8">
-    </div>
-   </div>
-</div>
-<!-- <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-             <img src="zinnialee23.github.io/1.jpg" style="width:100%" class="img-thumbnail">
-        </div>
-        <div class="col-md-4">
-             <img src="zinnialee23.github.io/2.jpg" style="width:100%" class="img-thumbnail">
-        </div>
-        <div class="col-md-4">
-             <img src="zinnialee23.github.io/aa.jpg" style="width:100%" class="img-thumbnail">
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-             <img src="zinnialee23.github.io/5.jpg" style="width:100%" class="img-thumbnail">
-         </div>
-         <div class="col-md-4">
-             <img src="zinnialee23.github.io/6.jpg" style="width:100%" class="img-thumbnail">
-         </div>
-         <div class="col-md-4">
-             <img src="zinnialee23.github.io/8.jpg" style="width:100%" class="img-thumbnail">
-         </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4">
-             <img src="zinnialee23.github.io/11.jpg" style="width:100%" class="img-thumbnail">
-        </div>
-         <div class="col-md-4">
-             <img src="zinnialee23.github.io/9.jpg" style="width:100%" class="img-thumbnail">
-        </div>
-         <div class="col-md-4">
-             <img src="zinnialee23.github.io/10.jpg" style="width:100%" class="img-thumbnail">
-        </div>
-        </div>
-</div> -->
-</body>
-
 <!DOCTYPE html>
-<html>
+<html >
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-* {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
-.mySlides {display: none}
-img {vertical-align: middle;}
-
-/* Slideshow container */
-.slideshow-container {
-  max-width: 1000px;
-  position: relative;
-  margin: auto;
-}
-
-/* Next & previous buttons */
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  padding: 16px;
-  margin-top: -22px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-}
-
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
-}
-
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-
-/* Number text (1/9 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 1s ease;
-}
-
-.active, .dot:hover {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 2s;
-  animation-name: fade;
-  animation-duration: 2s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .prev, .next,.text {font-size: 11px}
-}
-</style>
+  <!-- Site made with Mobirise Website Builder v4.7.2, https://mobirise.com -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Mobirise v4.7.2, mobirise.com">
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+  <link rel="shortcut icon" href="assets/images/logo2.png" type="image/x-icon">
+  <meta name="description" content="">
+  <title>Home</title>
+  <link rel="stylesheet" href="assets/web/assets/mobirise-icons/mobirise-icons.css">
+  <link rel="stylesheet" href="assets/tether/tether.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
+  <link rel="stylesheet" href="assets/socicon/css/styles.css">
+  <link rel="stylesheet" href="assets/dropdown/css/style.css">
+  <link rel="stylesheet" href="assets/theme/css/style.css">
+  <link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
+  
+  
+  
 </head>
 <body>
+  <section class="menu cid-qQqcnB9cHu" once="menu" id="menu1-e">
 
-<div class="slideshow-container">
+    
 
-<div class="mySlides fade">
-  <div class="numbertext">1 / 9</div>
-  <img src="zinnialee23.github.io/1.jpg" style="width:100%">
-</div>
+    <nav class="navbar navbar-expand beta-menu navbar-dropdown align-items-center navbar-fixed-top navbar-toggleable-sm">
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </button>
+        <div class="menu-logo">
+            <div class="navbar-brand">
+                <span class="navbar-logo">
+                    <a href="https://mobirise.com">
+                         <img src="assets/images/logo2.png" alt="Mobirise" style="height: 3.8rem;">
+                    </a>
+                </span>
+                <span class="navbar-caption-wrap">
+                    <a class="navbar-caption text-white display-4" href="https://mobirise.com">
+                        MOBIRISE
+                    </a>
+                </span>
+            </div>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
+                    <a class="nav-link link text-white display-4" href="https://mobirise.com">
+                        <span class="mbri-home mbr-iconfont mbr-iconfont-btn"></span>
+                        Services
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link link text-white display-4" href="https://mobirise.com">
+                        <span class="mbri-search mbr-iconfont mbr-iconfont-btn"></span>
+                        About Us
+                    </a>
+                </li></ul>
+            <div class="navbar-buttons mbr-section-btn"><a class="btn btn-sm btn-primary display-4" href="https://mobirise.com">
+                    <span class="mbri-save mbr-iconfont mbr-iconfont-btn "></span>
+                    Try It Now!
+                </a></div>
+        </div>
+    </nav>
+</section>
 
-<div class="mySlides fade">
-  <div class="numbertext">2 / 9</div>
-  <img src="zinnialee23.github.io/2.jpg" style="width:100%">
-</div>
+<section class="engine"><a href="https://mobirise.me/w">free html5 templates</a></section><section class="header6 cid-qQqefvkV6X mbr-fullscreen" data-bg-video="http://www.youtube.com/watch?v=uNCr7NdOJgw" id="header6-h">
 
-<div class="mySlides fade">
-  <div class="numbertext">3 / 9</div>
-  <img src="zinnialee23.github.io/aa.jpg" style="width:100%">
-</div>
+    
 
-<div class="mySlides fade">
-  <div class="numbertext">4 / 9</div>
-  <img src="zinnialee23.github.io/5.jpg" style="width:100%">
-</div>
-	
-<div class="mySlides fade">
-  <div class="numbertext">5 / 9</div>
-  <img src="zinnialee23.github.io/6.jpg" style="width:100%">
-</div>
-	
-<div class="mySlides fade">
-  <div class="numbertext">6 / 9</div>
-  <img src="zinnialee23.github.io/8.jpg" style="width:100%">
-</div>
-	
-<div class="mySlides fade">
-  <div class="numbertext">7 / 9</div>
-  <img src="zinnialee23.github.io/11.jpg" style="width:100%">
-</div>
-	
-<div class="mySlides fade">
-  <div class="numbertext">8 / 9</div>
-  <img src="zinnialee23.github.io/9.jpg" style="width:100%">
-</div>
-	
-<div class="mySlides fade">
-  <div class="numbertext">9 / 9</div>
-  <img src="zinnialee23.github.io/10.jpg" style="width:100%">
-</div>
-	
-<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-<a class="next" onclick="plusSlides(1)">&#10095;</a>
+    <div class="mbr-overlay" style="opacity: 0.2; background-color: rgb(0, 0, 0);">
+    </div>
 
-</div>
-<br>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            <div class="mbr-white col-md-10">
+                <h1 class="mbr-section-title align-center mbr-bold pb-3 mbr-fonts-style display-1">A False Step, A Lasting Cruse</h1>
+                <p class="mbr-text align-center pb-3 mbr-fonts-style display-5">How one loophole in the town planning control mechanism jeopardize
+<br>Hong Kong’s agricultural industry, nature, and residents’ life&nbsp;<br></p>
+                <div class="mbr-section-btn align-center">
+                        <a class="btn btn-md btn-primary display-4" href="https://mobirise.com">LEARN MORE</a>
+                        <a class="btn btn-md btn-white-outline display-4" href="https://mobirise.com">LIVE DEMO</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1)"></span> 
-  <span class="dot" onclick="currentSlide(2)"></span> 
-  <span class="dot" onclick="currentSlide(3)"></span> 
-  <span class="dot" onclick="currentSlide(4)"></span> 
-  <span class="dot" onclick="currentSlide(5)"></span> 
-  <span class="dot" onclick="currentSlide(6)"></span> 
-  <span class="dot" onclick="currentSlide(7)"></span> 
-  <span class="dot" onclick="currentSlide(8)"></span> 
-  <span class="dot" onclick="currentSlide(9)"></span> 
+    <div class="mbr-arrow hidden-sm-down" aria-hidden="true">
+        <a href="#next">
+            <i class="mbri-down mbr-iconfont"></i>
+        </a>
+    </div>
+</section>
+
+<section class="mbr-section article content11 cid-qQqfcTAhuB" id="content11-i">
+     
+
+    <div class="container">
+        <div class="media-container-row">
+            <div class="mbr-text counter-container col-12 col-md-8 mbr-fonts-style display-7">
+                <ol>
+                    <li><strong>MOBILE FRIENDLY</strong> - no special actions required, all sites you make with Mobirise are mobile-friendly. You don't have to create a special mobile version of your site, it will adapt automagically. <a href="https://mobirise.com/">Try it now!</a></li>
+                    <li><strong>EASY AND SIMPLE</strong> - cut down the development time with drag-and-drop website builder. Drop the blocks into the page, edit content inline and publish - no technical skills required. <a href="https://mobirise.com/">Try it now!</a></li>
+                    <li><strong>UNIQUE STYLES</strong> - choose from the large selection of latest pre-made blocks - full-screen intro, bootstrap carousel, content slider, responsive image gallery with lightbox, parallax scrolling, video backgrounds, hamburger menu, sticky header and more. <a href="https://mobirise.com/">Try it now!</a></li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cid-qQqcnG0yr3" id="footer1-g">
+
+    
+
+    
+
+    <div class="container">
+        <div class="media-container-row content text-white">
+            <div class="col-12 col-md-3">
+                <div class="media-wrap">
+                    <a href="https://mobirise.com/">
+                        <img src="assets/images/logo2.png" alt="Mobirise">
+                    </a>
+                </div>
+            </div>
+            <div class="col-12 col-md-3 mbr-fonts-style display-7">
+                <h5 class="pb-3">
+                    Address
+                </h5>
+                <p class="mbr-text">
+                    1234 Street Name
+                    <br>City, AA 99999
+                </p>
+            </div>
+            <div class="col-12 col-md-3 mbr-fonts-style display-7">
+                <h5 class="pb-3">
+                    Contacts
+                </h5>
+                <p class="mbr-text">
+                    Email: support@mobirise.com
+                    <br>Phone: +1 (0) 000 0000 001
+                    <br>Fax: +1 (0) 000 0000 002
+                </p>
+            </div>
+            <div class="col-12 col-md-3 mbr-fonts-style display-7">
+                <h5 class="pb-3">
+                    Links
+                </h5>
+                <p class="mbr-text">
+                    <a class="text-primary" href="https://mobirise.com/">Website builder</a>
+                    <br><a class="text-primary" href="https://mobirise.com/mobirise-free-win.zip">Download for Windows</a>
+                    <br><a class="text-primary" href="https://mobirise.com/mobirise-free-mac.zip">Download for Mac</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer-lower">
+            <div class="media-container-row">
+                <div class="col-sm-12">
+                    <hr>
+                </div>
+            </div>
+            <div class="media-container-row mbr-white">
+                <div class="col-sm-6 copyright">
+                    <p class="mbr-text mbr-fonts-style display-7">
+                        © Copyright 2017 Mobirise - All Rights Reserved
+                    </p>
+                </div>
+                <div class="col-md-6">
+                    <div class="social-list align-right">
+                        <div class="soc-item">
+                            <a href="https://twitter.com/mobirise" target="_blank">
+                                <span class="socicon-twitter socicon mbr-iconfont mbr-iconfont-social"></span>
+                            </a>
+                        </div>
+                        <div class="soc-item">
+                            <a href="https://www.facebook.com/pages/Mobirise/1616226671953247" target="_blank">
+                                <span class="socicon-facebook socicon mbr-iconfont mbr-iconfont-social"></span>
+                            </a>
+                        </div>
+                        <div class="soc-item">
+                            <a href="https://www.youtube.com/c/mobirise" target="_blank">
+                                <span class="socicon-youtube socicon mbr-iconfont mbr-iconfont-social"></span>
+                            </a>
+                        </div>
+                        <div class="soc-item">
+                            <a href="https://instagram.com/mobirise" target="_blank">
+                                <span class="socicon-instagram socicon mbr-iconfont mbr-iconfont-social"></span>
+                            </a>
+                        </div>
+                        <div class="soc-item">
+                            <a href="https://plus.google.com/u/0/+Mobirise" target="_blank">
+                                <span class="socicon-googleplus socicon mbr-iconfont mbr-iconfont-social"></span>
+                            </a>
+                        </div>
+                        <div class="soc-item">
+                            <a href="https://www.behance.net/Mobirise" target="_blank">
+                                <span class="socicon-behance socicon mbr-iconfont mbr-iconfont-social"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+  <script src="assets/web/assets/jquery/jquery.min.js"></script>
+  <script src="assets/popper/popper.min.js"></script>
+  <script src="assets/tether/tether.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  <script src="assets/smoothscroll/smooth-scroll.js"></script>
+  <script src="assets/touchswipe/jquery.touch-swipe.min.js"></script>
+  <script src="assets/ytplayer/jquery.mb.ytplayer.min.js"></script>
+  <script src="assets/vimeoplayer/jquery.mb.vimeo_player.js"></script>
+  <script src="assets/dropdown/js/script.min.js"></script>
+  <script src="assets/theme/js/script.js"></script>
   
-</div>
-
-<script>
-var slideIndex = 1;
-showSlides(slideIndex);
-
-function plusSlides(n) {
-  showSlides(slideIndex += n);
-}
-
-function currentSlide(n) {
-  showSlides(slideIndex = n);
-}
-
-function showSlides(n) {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  if (n > slides.length) {slideIndex = 1}    
-  if (n < 1) {slideIndex = slides.length}
-  for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";  
-  }
-  for (i = 0; i < dots.length; i++) {
-      dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-}
-</script>
-
+  
 </body>
-</html> 
+</html>
