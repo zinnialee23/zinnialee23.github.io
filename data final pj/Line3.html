@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<style>
+    p {
+        font-size: 2px;
+        font-family: "Optima";
+    }
+    
+    .axis {
+        font: 12px;
+    }
+    
+    .line {
+        fill: none;
+        stroke-width: 2px;
+    }
+    
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        width: 100px;
+        height: 30px;
+        padding: 10px;
+        font: 14px sans-serif;
+        background: #bfbfbf;
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none;
+    }
+</style>
+
+<body>
+
+    <!-- load the d3.js library -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+        // set the dimensions and margins of the graph
+        var margin = {
+                top: 50,
+                right: 20,
+                bottom: 30,
+                left: 50
+            },
+            width = 750 - margin.left - margin.right,
+            height = 450 - margin.top - margin.bottom;
+
+        // parse the date / time
+        var parseTime = d3.timeParse("%d-%b-%y");
+        var formatTime = d3.timeFormat("%e %B");
+
+        // tooltip
+        var div = d3.select("body").append("div")
+            .attr("class", "tooltip")
+            .style("opacity", 0);
+
+        // set the ranges
+        var x = d3.scaleLinear().range([0, width]);
+        var y = d3.scaleLinear().range([height, 0]);
+
+        // define the 1st line
+        var valueline = d3.line()
+            .x(function(d) {
+                return x(d.Year);
+            })
+            .y(function(d) {
+                return y(d.Import);
+            });
+
+        // define the 2nd line
+        var valueline2 = d3.line()
+            .x(function(d) {
+                return x(d.Year);
+            })
+            .y(function(d) {
+                return y(d.Export);
+            });
+
+        // append the svg obgect to the body of the page
+        // appends a 'group' element to 'svg'
+        // moves the 'group' element to the top left margin
+        var svg = d3.select("body").append("svg")
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform",
+                "translate(" + margin.left + "," + margin.top + ")");
+
+        // Get the data
+        d3.csv("data1.csv", function(error, data) {
+            if (error) throw error;
+
+            // format the data
+            data.forEach(function(d) {
+                //d.Year = +d.Year;
+                parseTime(d.Year);
+                d.Import = +d.Import;
+                d.Export = +d.Export;
+            });
+
+            // Scale the range of the data
+            x.domain(d3.extent(data, function(d) {
+                return d.Year;
+            }));
+            y.domain([0, d3.max(data, function(d) {
+                return Math.max(d.Import, d.Export);
+            })]);
+
+            // Add the valueline path.
+            svg.append("path")
+                .data([data])
+                .attr("class", "line")
+                .style("stroke", "#E74C3C")
+                .attr("d", valueline);
+
+            // Add the valueline2 path.
+            svg.append("path")
+                .data([data])
+                .attr("class", "line")
+                .style("stroke", "#2E86C1")
+                .attr("d", valueline2);
+
+            svg.selectAll("dot")
+                .data(data)
+                .enter().append("circle")
+                .attr("r", 6)
+                .style("fill", "#515A5A")
+                .attr("cx", function(d) {
+                    return x(d.Year);
+                })
+                .attr("cy", function(d) {
+                    return y(d.Import);
+                })
+                .on("mouseover", function(d) {
+                    var point = d3.select(this)
+                    point.attr("r", 10)
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.html(d.Year + "<br/>" + d.Import + " tonnes")
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                    var point = d3.select(this)
+                    point.attr("r", 6)
+                    div.transition()
+                        .duration(500)
+                        .attr("r", 6)
+                        .style("opacity", 0);
+                });
+
+
+
+
+            svg.selectAll("dot")
+                .data(data)
+                .enter().append("circle")
+                .attr("r", 6)
+                .style("fill", "#515A5A")
+                .attr("cx", function(d) {
+                    return x(d.Year);
+                })
+                .attr("cy", function(d) {
+                    return y(d.Export);
+                })
+                .on("mouseover", function(d) {
+                    var point = d3.select(this)
+                    point.attr("r", 10)
+                    div.transition()
+                        .duration(200)
+                        .style("opacity", .9);
+                    div.html(d.Year + "<br/>" + d.Export + " tonnes")
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - 28) + "px");
+                })
+                .on("mouseout", function(d) {
+                    var point = d3.select(this)
+                    point.attr("r", 6)
+                    div.transition()
+                        .duration(500)
+                        .attr("r", 6)
+                        .style("opacity", 0);
+                });
+
+
+            // Add the X Axis
+            svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .style("font-size", 12)
+                .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+
+            // Add the Y Axis
+            svg.append("g")
+                .style("font-size", 12)
+                .call(d3.axisLeft(y));
+
+            var color = [{
+                "name": "Import",
+                "color": "#E74C3C"
+
+            }, {
+                "name": "Export",
+                "color": "#2E86C1"
+
+            }];
+
+            var legend = svg.selectAll(".legend")
+                .data(color)
+                .enter().append("g")
+                .attr("class", "legend")
+                .attr("transform", function(d, i) {
+                    return "translate(0," + i * 20 + ")";
+                });
+
+            legend.append("rect")
+                .attr("x", width - 18)
+                .attr("width", 18)
+                .attr("height", 18)
+                .style("fill", function(d) {
+                    return d.color;
+                });
+
+            legend.append("text")
+                .attr("x", width - 24)
+                .attr("y", 9)
+                .attr("dy", ".35em")
+                .style("text-anchor", "end")
+                // .style("font-family", "Helvetica")
+                .style("font-size", 14)
+                .text(function(d) {
+                    return d.name;
+                });
+
+            svg.append("text")
+                .attr("x", (width / 2))
+                .attr("y", 2.5 - (margin.top / 2))
+                .attr("text-anchor", "middle")
+                .style("font-size", "20px")
+                .style("font-family", "Optima")
+                .text("Hong Kong shark product import and re-export volume (tonnes)");
+
+
+
+        });
+    </script>
+    <p>Source: WWF</p>
+</body>
