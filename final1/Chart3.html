@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+    p {
+        font-size: 2px;
+        font-family: "Optima";
+    }
+    
+    .axis {
+        font: 12px;
+    }
+    
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #D4D8DA;
+        stroke-width: 1px;
+        shape-rendering: crispEdges;
+    }
+    
+    .toolTip {
+        position: absolute;
+        text-align: center;
+        width: 120px;
+        height: 35px;
+        padding: 10px;
+        font: 14px sans-serif;
+        background: #bfbfbf;
+        border: 0px;
+        border-radius: 8px;
+        pointer-events: none;
+        display: none;
+    }
+</style>
+
+<body>
+    <svg width="960" height="500"></svg>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+
+    <script>
+        var svg = d3.select("svg")
+        margin = {
+                top: 50,
+                right: 30,
+                bottom: 115,
+                left: 60
+            },
+            width = 750 - margin.left - margin.right,
+            height = 500 - margin.top - margin.bottom;
+        // width = +svg.attr("width") - margin.left - margin.right,
+        // height = +svg.attr("height") - margin.top - margin.bottom;
+
+        var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+        var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+            y = d3.scaleLinear().rangeRound([height, 0]);
+
+        var colours = d3.scaleOrdinal()
+            .range(["#154360",
+                "#1a5276",
+                "#1f618d",
+                "#2471a3",
+                "#2980b9",
+                "#5499c7",
+                "#5dade2",
+                "#85c1e9",
+                "#a9cce3",
+                "#aed6f1"
+            ]);
+
+        var g = svg.append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+        d3.json("csvjson.json", function(error, data) {
+            if (error) throw error;
+
+            x.domain(data.map(function(d) {
+                return d.country;
+            }));
+            y.domain([0, d3.max(data, function(d) {
+                return d.number;
+            })]);
+
+            g.append("g")
+                .attr("class", "axis axis--x")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x))
+                .selectAll("text")
+                .style("text-anchor", "end")
+                .style("font-size", "12px")
+                .attr("dx", "-.8em")
+                .attr("dy", ".15em")
+                .attr("transform", "rotate(-65)")
+
+            g.append("g")
+                .attr("class", "axis axis--y")
+                .call(d3.axisLeft(y).ticks(12).tickSizeInner([-width]))
+                .append("text")
+                .attr("transform", "rotate(-90)")
+                .attr("y", 6)
+                .attr("dy", "0.71em")
+                .attr("text-anchor", "end")
+                .attr("fill", "#5D6971")
+                .style("font-size", "12px")
+
+            g.selectAll(".bar")
+                .data(data)
+                .enter().append("rect")
+                .attr("x", function(d) {
+                    return x(d.country);
+                })
+                .attr("y", function(d) {
+                    return y(d.number);
+                })
+                .attr("width", x.bandwidth())
+                .attr("height", function(d) {
+                    return height - y(d.number);
+                })
+                .attr("fill", function(d) {
+                    return colours(d.country);
+                })
+                .on("mouseover", function(d) {
+                    tooltip
+                        .style("left", d3.event.pageX - 50 + "px")
+                        .style("top", d3.event.pageY - 70 + "px")
+                        .style("display", "inline-block")
+                        .html((d.country) + "<br>" + (d.number) + " tonnes");
+                    tooltip
+                        .transition()
+                        .duration(200)
+                        .style("opacity", .9)
+                })
+                .on("mouseout", function(d) {
+                    tooltip.transition()
+                        .duration(500)
+                        .style("opacity", 0);
+                });
+            g.append("text")
+                .attr("x", (width / 2))
+                .attr("y", 2.5 - (margin.top / 2))
+                .attr("text-anchor", "middle")
+                .style("font-size", "20px")
+                .style("font-family", "Optima")
+                .text("2011 world exports of shark fin (tonnes)");
+
+        });
+    </script>
+    <p>Source: Food and Agriculture Organization of the United Nations</p>
+</body>

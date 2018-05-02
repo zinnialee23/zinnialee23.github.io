@@ -1,0 +1,143 @@
+<html>
+
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8" id="chart1">
+
+            </div>
+            <div class="col-md-4" style="background-color: #bfbfbf">
+                <p>Total government revenue in 2018-2019 is $604.5 billion.
+                    <br>The total revenue has increased 19% compared to 2017-2018.<br> Most of the revenue comes from profit taxs this year.<br> With a surplus of $138 billion, the government announced a series of giveaways and polices in different aspects.
+                </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+
+<svg width="960" height="500"></svg>
+<script>
+    var svg = d3.select("#chart1").append("svg")
+    margin = {
+            top: 50,
+            right: 30,
+            bottom: 115,
+            left: 60
+        },
+        width = 750 - margin.left - margin.right,
+        height = 500 - margin.top - margin.bottom;
+    // width = +svg.attr("width") - margin.left - margin.right,
+    // height = +svg.attr("height") - margin.top - margin.bottom;
+
+    var tooltip = d3.select("body").append("div").attr("class", "toolTip");
+
+    var x = d3.scaleBand().rangeRound([0, width]).padding(0.1),
+        y = d3.scaleLinear().rangeRound([height, 0]);
+
+    var colours = d3.scaleOrdinal()
+        .range(["#154360",
+            "#1a5276",
+            "#1f618d",
+            "#2471a3",
+            "#2980b9",
+            "#5499c7",
+            "#5dade2",
+            "#85c1e9",
+            "#a9cce3",
+            "#aed6f1"
+        ]);
+
+    var g = svg.append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    d3.json("csvjson.json", function(error, data) {
+        if (error) throw error;
+
+        x.domain(data.map(function(d) {
+            return d.country;
+        }));
+        y.domain([0, d3.max(data, function(d) {
+            return d.number;
+        })]);
+
+        g.append("g")
+            .attr("class", "axis axis--x")
+            .attr("transform", "translate(0," + height + ")")
+            .call(d3.axisBottom(x))
+            .selectAll("text")
+            .style("text-anchor", "end")
+            .style("font-size", "12px")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", "rotate(-65)")
+
+        g.append("g")
+            .attr("class", "axis axis--y")
+            .call(d3.axisLeft(y).ticks(12).tickSizeInner([-width]))
+            .append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 6)
+            .attr("dy", "0.71em")
+            .attr("text-anchor", "end")
+            .attr("fill", "#5D6971")
+            .style("font-size", "12px")
+
+        g.selectAll(".bar")
+            .data(data)
+            .enter().append("rect")
+            .attr("x", function(d) {
+                return x(d.country);
+            })
+            .attr("y", function(d) {
+                return y(d.number);
+            })
+            .attr("width", x.bandwidth())
+            .attr("height", function(d) {
+                return height - y(d.number);
+            })
+            .attr("fill", function(d) {
+                return colours(d.country);
+            })
+            .on("mouseover", function(d) {
+                tooltip
+                    .style("left", d3.event.pageX - 50 + "px")
+                    .style("top", d3.event.pageY - 70 + "px")
+                    .style("display", "inline-block")
+                    .html((d.country) + "<br>" + (d.number) + " tonnes");
+                tooltip
+                    .transition()
+                    .duration(200)
+                    .style("opacity", .9)
+            })
+            .on("mouseout", function(d) {
+                tooltip.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
+        g.append("text")
+            .attr("x", (width / 2))
+            .attr("y", 2.5 - (margin.top / 2))
+            .attr("text-anchor", "middle")
+            .style("font-size", "20px")
+            .style("font-family", "Optima")
+            .text("2011 world exports of shark fin (tonnes)");
+
+    });
+</script>
+<p>Source: Food and Agriculture Organization of the United Nations</p>
+
+</html>
