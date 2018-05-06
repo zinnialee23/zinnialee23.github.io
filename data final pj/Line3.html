@@ -1,243 +1,251 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 
-<style>
-    p {
-        font-size: 10px;
-        font-family: "Optima";
-    }
-    
-    .axis {
-        font: 12px;
-    }
-    
-    .line {
-        fill: none;
-        stroke-width: 2px;
-    }
-    
-    div.tooltip {
-        position: absolute;
-        text-align: center;
-        width: 100px;
-        height: 30px;
-        padding: 10px;
-        font: 14px sans-serif;
-        background: #bfbfbf;
-        border: 0px;
-        border-radius: 8px;
-        pointer-events: none;
-    }
-</style>
-
-<body>
-
-    <!-- load the d3.js library -->
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script>
-        // set the dimensions and margins of the graph
-        var margin = {
-                top: 50,
-                right: 20,
-                bottom: 30,
-                left: 50
-            },
-            width = 750 - margin.left - margin.right,
-            height = 450 - margin.top - margin.bottom;
-
-
-        var parseTime = d3.timeParse("%d-%b-%y");
-        var formatTime = d3.timeFormat("%e %B");
-
-      
-        var div = d3.select("body").append("div")
-            .attr("class", "tooltip")
-            .style("opacity", 0);
-
-        var x = d3.scaleLinear().range([0, width]);
-        var y = d3.scaleLinear().range([height, 0]);
-
-
-        var valueline = d3.line()
-            .x(function(d) {
-                return x(d.Year);
-            })
-            .y(function(d) {
-                return y(d.Import);
-            });
-
-
-        var valueline2 = d3.line()
-            .x(function(d) {
-                return x(d.Year);
-            })
-            .y(function(d) {
-                return y(d.Export);
-            });
-
-       
-        var svg = d3.select("body").append("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform",
-                "translate(" + margin.left + "," + margin.top + ")");
-
-        d3.csv("data1.csv", function(error, data) {
-            if (error) throw error;
-
-            
-            data.forEach(function(d) {
-               
-                parseTime(d.Year);
-                d.Import = +d.Import;
-                d.Export = +d.Export;
-            });
-
-     
-            x.domain(d3.extent(data, function(d) {
-                return d.Year;
-            }));
-            y.domain([0, d3.max(data, function(d) {
-                return Math.max(d.Import, d.Export);
-            })]);
-
-            svg.append("path")
-                .data([data])
-                .attr("class", "line")
-                .style("stroke", "#E74C3C")
-                .attr("d", valueline);
-
-         
-            svg.append("path")
-                .data([data])
-                .attr("class", "line")
-                .style("stroke", "#2E86C1")
-                .attr("d", valueline2);
-
-            svg.selectAll("dot")
-                .data(data)
-                .enter().append("circle")
-                .attr("r", 6)
-                .style("fill", "#515A5A")
-                .attr("cx", function(d) {
-                    return x(d.Year);
-                })
-                .attr("cy", function(d) {
-                    return y(d.Import);
-                })
-                .on("mouseover", function(d) {
-                    var point = d3.select(this)
-                    point.attr("r", 10)
-                    div.transition()
-                        .duration(200)
-                        .style("opacity", .9);
-                    div.html(d.Year + "<br/>" + d.Import + " tonnes")
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-                })
-                .on("mouseout", function(d) {
-                    var point = d3.select(this)
-                    point.attr("r", 6)
-                    div.transition()
-                        .duration(500)
-                        .attr("r", 6)
-                        .style("opacity", 0);
-                });
-
-
-
-
-            svg.selectAll("dot")
-                .data(data)
-                .enter().append("circle")
-                .attr("r", 6)
-                .style("fill", "#515A5A")
-                .attr("cx", function(d) {
-                    return x(d.Year);
-                })
-                .attr("cy", function(d) {
-                    return y(d.Export);
-                })
-                .on("mouseover", function(d) {
-                    var point = d3.select(this)
-                    point.attr("r", 10)
-                    div.transition()
-                        .duration(200)
-                        .style("opacity", .9);
-                    div.html(d.Year + "<br/>" + d.Export + " tonnes")
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 28) + "px");
-                })
-                .on("mouseout", function(d) {
-                    var point = d3.select(this)
-                    point.attr("r", 6)
-                    div.transition()
-                        .duration(500)
-                        .attr("r", 6)
-                        .style("opacity", 0);
-                });
-
-
+<head>
+    <style>
+        p {
+            font-size: 10px;
+            font-family: "Optima";
+        }
         
-            svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .style("font-size", 12)
-                .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+        .axis {
+            font: 12px;
+        }
+        
+        .line {
+            fill: none;
+            stroke-width: 2px;
+        }
+        
+        div.tooltip {
+            position: absolute;
+            text-align: center;
+            width: 100px;
+            height: 30px;
+            padding: 10px;
+            font: 14px sans-serif;
+            background: #bfbfbf;
+            border: 0px;
+            border-radius: 8px;
+            pointer-events: none;
+        }
+    </style>
 
-            
-            svg.append("g")
-                .style("font-size", 12)
-                .call(d3.axisLeft(y));
+    <body>
+        <script src="https://d3js.org/d3.v4.min.js"></script>
+        <script>
+            // set the dimensions and margins of the graph
+            var margin = {
+                    top: 50,
+                    right: 20,
+                    bottom: 30,
+                    left: 50
+                },
+                width = 750 - margin.left - margin.right,
+                height = 450 - margin.top - margin.bottom;
+            var parseTime = d3.timeParse("%d-%b-%y");
+            var formatTime = d3.timeFormat("%e %B");
 
-            var color = [{
-                "name": "Import",
-                "color": "#E74C3C"
-
-            }, {
-                "name": "Export",
-                "color": "#2E86C1"
-
-            }];
-
-            var legend = svg.selectAll(".legend")
-                .data(color)
-                .enter().append("g")
-                .attr("class", "legend")
-                .attr("transform", function(d, i) {
-                    return "translate(0," + i * 20 + ")";
+            var div = d3.select("body").append("div")
+                .attr("class", "tooltip")
+                .style("opacity", 0);
+            var x = d3.scaleLinear().range([0, width]);
+            var y = d3.scaleLinear().range([height, 0]);
+            var valueline = d3.line()
+                .x(function(d) {
+                    return x(d.Year);
+                })
+                .y(function(d) {
+                    return y(d.Import);
+                });
+            var valueline2 = d3.line()
+                .x(function(d) {
+                    return x(d.Year);
+                })
+                .y(function(d) {
+                    return y(d.Export);
                 });
 
-            legend.append("rect")
-                .attr("x", width - 18)
-                .attr("width", 18)
-                .attr("height", 18)
-                .style("fill", function(d) {
-                    return d.color;
+            var svg = d3.select("body").append("svg")
+
+            .attr('viewBox', '30 0 ' + (width + margin.right + margin.left) + ' ' + (height + margin.top + margin.bottom))
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom)
+                .call(responsivefy)
+                .append("g")
+                .attr("transform",
+                    "translate(" + margin.left + "," + margin.top + ")");
+            // .attr("preserveAspectRatio", "xMinYMin meet")
+            // .attr("width", (width + margin) + "px")
+            // .attr("height", (height + margin) + "px")
+            // .append('g')
+            // .attr("transform", `translate(${margin}, ${margin})`);
+
+
+            d3.csv("data1.csv", function(error, data) {
+                if (error) throw error;
+
+                data.forEach(function(d) {
+
+                    parseTime(d.Year);
+                    d.Import = +d.Import;
+                    d.Export = +d.Export;
                 });
 
-            legend.append("text")
-                .attr("x", width - 24)
-                .attr("y", 9)
-                .attr("dy", ".35em")
-                .style("text-anchor", "end")
-                // .style("font-family", "Helvetica")
-                .style("font-size", 14)
-                .text(function(d) {
-                    return d.name;
-                });
+                x.domain(d3.extent(data, function(d) {
+                    return d.Year;
+                }));
+                y.domain([0, d3.max(data, function(d) {
+                    return Math.max(d.Import, d.Export);
+                })]);
+                svg.append("path")
+                    .data([data])
+                    .attr("class", "line")
+                    .style("stroke", "#E74C3C")
+                    .attr("d", valueline);
 
-            svg.append("text")
-                .attr("x", (width / 2))
-                .attr("y", 2.5 - (margin.top / 2))
-                .attr("text-anchor", "middle")
-                .style("font-size", "20px")
-                .style("font-family", "Optima")
-                .text("Hong Kong shark product import and re-export volume (tonnes)");
+                svg.append("path")
+                    .data([data])
+                    .attr("class", "line")
+                    .style("stroke", "#2E86C1")
+                    .attr("d", valueline2);
+                svg.selectAll("dot")
+                    .data(data)
+                    .enter().append("circle")
+                    .attr("r", 6)
+                    .style("fill", "#515A5A")
+                    .attr("cx", function(d) {
+                        return x(d.Year);
+                    })
+                    .attr("cy", function(d) {
+                        return y(d.Import);
+                    })
+                    .on("mouseover", function(d) {
+                        var point = d3.select(this)
+                        point.attr("r", 10)
+                        div.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                        div.html(d.Year + "<br/>" + d.Import + " tonnes")
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function(d) {
+                        var point = d3.select(this)
+                        point.attr("r", 6)
+                        div.transition()
+                            .duration(500)
+                            .attr("r", 6)
+                            .style("opacity", 0);
+                    });
+                svg.selectAll("dot")
+                    .data(data)
+                    .enter().append("circle")
+                    .attr("r", 6)
+                    .style("fill", "#515A5A")
+                    .attr("cx", function(d) {
+                        return x(d.Year);
+                    })
+                    .attr("cy", function(d) {
+                        return y(d.Export);
+                    })
+                    .on("mouseover", function(d) {
+                        var point = d3.select(this)
+                        point.attr("r", 10)
+                        div.transition()
+                            .duration(200)
+                            .style("opacity", .9);
+                        div.html(d.Year + "<br/>" + d.Export + " tonnes")
+                            .style("left", (d3.event.pageX) + "px")
+                            .style("top", (d3.event.pageY - 28) + "px");
+                    })
+                    .on("mouseout", function(d) {
+                        var point = d3.select(this)
+                        point.attr("r", 6)
+                        div.transition()
+                            .duration(500)
+                            .attr("r", 6)
+                            .style("opacity", 0);
+                    });
+
+                svg.append("g")
+                    .attr("transform", "translate(0," + height + ")")
+                    .style("font-size", 12)
+                    .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+
+                svg.append("g")
+                    .style("font-size", 12)
+                    .call(d3.axisLeft(y));
+
+                var color = [{
+                    "name": "Import",
+                    "color": "#E74C3C"
+                }, {
+                    "name": "Export",
+                    "color": "#2E86C1"
+                }];
+                var legend = svg.selectAll(".legend")
+                    .data(color)
+                    .enter().append("g")
+                    .attr("class", "legend")
+                    .attr("transform", function(d, i) {
+                        return "translate(0," + i * 20 + ")";
+                    });
+                legend.append("rect")
+                    .attr("x", width - 18)
+                    .attr("width", 18)
+                    .attr("height", 18)
+                    .style("fill", function(d) {
+                        return d.color;
+                    });
+                legend.append("text")
+                    .attr("x", width - 24)
+                    .attr("y", 9)
+                    .attr("dy", ".35em")
+                    .style("text-anchor", "end")
+                    // .style("font-family", "Helvetica")
+                    .style("font-size", 14)
+                    .text(function(d) {
+                        return d.name;
+                    });
+                svg.append("text")
+                    .attr("x", (width / 2))
+                    .attr("y", 2.5 - (margin.top / 2))
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "20px")
+                    .style("font-family", "Optima")
+                    .text("Hong Kong shark product import and re-export volume (tonnes)");
+
+                svg.attr("id", "aRandomID");
+            });
 
 
+            function responsivefy(svg) {
+                // get container + svg aspect ratio
+                var container = d3.select(svg.node().parentNode),
+                    width = parseInt(svg.style("width")),
+                    height = parseInt(svg.style("height")),
+                    aspect = width / height;
 
-        });
-    </script>
-    <p>Source: <a href="https://d3q9070b7kewus.cloudfront.net/downloads/shark_product_import_and_re_export_volume_eng.pdf">WWF </a></p>
-</body>
+                // add viewBox and preserveAspectRatio properties,
+                // and call resize so that svg resizes on inital page load
+                svg.attr("viewBox", "0 0 " + width + " " + height)
+                    .attr("perserveAspectRatio", "xMinYMid")
+                    .call(resize);
+
+                // to register multiple listeners for same event type, 
+                // you need to add namespace, i.e., 'click.foo'
+                // necessary if you call invoke this function for multiple svgs
+                // api docs: https://github.com/mbostock/d3/wiki/Selections#on
+                d3.select(window).on("resize." + container.attr("id"), resize);
+
+                // get width of container and resize svg to fit it
+                function resize() {
+                    var targetWidth = parseInt(container.style("width"));
+                    svg.attr("width", targetWidth);
+                    svg.attr("height", Math.round(targetWidth / aspect));
+                }
+            }
+        </script>
+        <p>Source: <a href="https://d3q9070b7kewus.cloudfront.net/downloads/shark_product_import_and_re_export_volume_eng.pdf">WWF </a></p>
+    </body>
